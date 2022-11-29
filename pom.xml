@@ -52,24 +52,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.qxwz</groupId>
-            <artifactId>qxwz-config-spring-boot-starter</artifactId>
-            <version>${qxwz-config.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.qxwz.shared</groupId>
-            <artifactId>galaxy-api</artifactId>
-            <version>${galaxy.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.qxwz.shared</groupId>
-            <artifactId>galaxy-app</artifactId>
-            <version>${galaxy.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-trace</artifactId>
             <version>${skywalking.version}</version>
