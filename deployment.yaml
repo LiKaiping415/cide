@@ -1,0 +1,62 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  labels:
+    app: "tekton-test"
+  name: "tekton-test"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "tekton-test"
+  template:
+    metadata:
+      labels:
+        app: "tekton-test"
+    spec:
+      imagePullSecrets:
+        - name: docker-config
+      containers:
+        - image: "30.90.21.183/library/cide-test:latest"
+          imagePullPolicy: "Always"
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: "/wire/execute"
+              port: 9090
+              scheme: "HTTP"
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+          name: "tekton-test"
+          ports:
+            - containerPort: 9090
+              name: "http"
+              protocol: "TCP"
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: "/wire/execute"
+              port: 9090
+              scheme: "HTTP"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tekton-test
+  name: tekton-test
+spec:
+  ports:
+    - port: 9090
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    app: tekton-test
+  type: NodePort
