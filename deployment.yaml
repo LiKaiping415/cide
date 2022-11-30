@@ -21,29 +21,11 @@ spec:
           imagePullPolicy: "Always"
           livenessProbe:
             failureThreshold: 3
-            httpGet:
-              path: "/wire/execute"
-              port: 9090
-              scheme: "HTTP"
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 10
           name: "tekton-test"
           ports:
             - containerPort: 9090
               name: "http"
               protocol: "TCP"
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: "/wire/execute"
-              port: 9090
-              scheme: "HTTP"
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 10
 ---
 apiVersion: v1
 kind: Service
