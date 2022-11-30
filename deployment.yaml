@@ -19,8 +19,6 @@ spec:
       containers:
         - image: "30.90.21.183/library/cide-test:latest"
           imagePullPolicy: "Always"
-          livenessProbe:
-            failureThreshold: 3
           name: "tekton-test"
           ports:
             - containerPort: 9090
